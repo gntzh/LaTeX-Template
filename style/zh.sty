@@ -1,0 +1,28 @@
+% 中文支持和汉化
+\PassOptionsToPackage{no-math}{fontspec}
+\PassOptionsToPackage{CJKmath}{xeCJK} %公式中直接的中文
+\RequirePackage[UTF8, zihao=false, scheme=chinese, heading=true]{ctex}
+
+\setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置主字体
+\setCJKsansfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置无衬线字体
+\setCJKmonofont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置等宽字体
+
+% 其他字体
+\let\kai\relax
+\let\fang\relax
+\newCJKfontfamily\kai{KaiTi}[AutoFakeBold, AutoFakeSlant] % [AutoFakeSlant=0.3, AutoFakeBold=3]
+\newCJKfontfamily\fang{FangSong}[AutoFakeBold, AutoFakeSlant]
+
+% \RequirePackage{datetime} %日期
+% \renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+% \renewcommand\contentsname{\centering\textbf{目录}} %Contents
+% \renewcommand\listfigurename{\centering\textbf{插图目录}}
+% \renewcommand\listtablename{\centering\textbf{表格目录}}
+% \renewcommand\refname{\centering\textbf{参考文献}}
+% \renewcommand\indexname{索引}
+% \renewcommand\figurename{图}
+% \renewcommand\tablename{表}
+% \renewcommand\abstractname{摘要}
+% \renewcommand\partname{部分}
+% \renewcommand\appendixname{附录}
+\endinput

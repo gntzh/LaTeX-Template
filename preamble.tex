@@ -1,0 +1,37 @@
+\usepackage{./style/packages}
+\setlist{nosep} % 清楚列表间距
+
+\usepackage{./style/format}
+\usepackage{./style/code}
+\usepackage{./style/box}
+\usepackage{./style/math}
+\setmathfont{Cambria Math} % Office携带
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/,optimize command away=\includepdf]
+\tcbset{shield externalize} % 屏蔽layer层的externalize, 避免与tcolorbox的冲突
+
+% 公式间距
+\AtBeginDocument{ %设置在这里或者\normalsize有效
+  \setlength{\abovedisplayskip}{3pt}
+  \setlength{\belowdisplayskip}{3pt}
+  \setlength{\abovedisplayshortskip}{3pt}
+  \setlength{\belowdisplayshortskip}{3pt}
+}
+
+
+\usepackage{./style/macro}
+\usepackage{./style/zh}
+
+% \addinputpath{./content/}
+% graphics path
+\graphicspath{{./img}}
+
+\usepackage{./style/subfile}
+%% 易引起兼容性冲突
+\usepackage{hyperref}%用于超链接，另外添加该包目录会自动添加引用。
+\hypersetup{
+  unicode, psdextra,
+  citecolor=green,
+  % linkcolor=airforceblue,
+  % urlcolor=blue,anchorcolor=blue,
+}
