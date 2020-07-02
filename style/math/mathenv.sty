@@ -162,20 +162,26 @@
 \newcounter{exam}[\vMathEnvLevel]
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
-\newenvironment{example}[1][]{
+\NewDocumentEnvironment{example}{O{}}{
   \refstepcounter{exam}
-  \par\noindent\textbf{\color{main}{\examplename} \theexam #1 }\rmfamily
+  \par\noindent\textbf{\color{main}{\examplename} \theexam #1}\rmfamily
 }{
   \par\ignorespacesafterend
 }
 
-\newenvironment{remark}{
-  \noindent\textbf{\color{second}\remarkname}
+\NewDocumentEnvironment{remark}{o}{
+  \noindent\textbf{
+    \color{third}\remarkname
+    \IfValueT{#1}{~#1}
+  }
 }{\par}
 
-\newenvironment{note}{
+\NewDocumentEnvironment{note}{o}{
   \par\noindent\makebox[-3pt][r]{{\large\color{main!90}\ensuremath{◈}}}
-  \textbf{\color{second}\notename}\itshape
+  \textbf{
+    \color{second}\notename 
+    \IfValueT{#1}{~#1}
+  }\itshape
 }{\par}
 
 \endinput

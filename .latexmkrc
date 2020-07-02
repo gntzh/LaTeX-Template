@@ -7,6 +7,9 @@ $pdf_mode = 5;
 $xelatex = "xelatex -file-line-error -halt-on-error -interaction=nonstopmode --synctex=1 %O --shell-escape %S";
 $xdvipdfmx = "xdvipdfmx -E -o %D %O %S";
 
+# subfiles
+$do_cd = 1;
+
 # PDF预览
 #$preview_mode = 0;
 #$pdf_previewer = "SumatraPDF -reuse-instance -inverse-search -a %O %S";
