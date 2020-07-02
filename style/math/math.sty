@@ -2,14 +2,12 @@
 
 \ProcessKeyvalOptions*\relax
 
-% 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
-\RequirePackage{unicode-math}
-\unimathsetup{math-style=ISO}
 % 函数图
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest} % 向后兼容
 
 % 自定义公式
-\providecommand\Vector{\symbfup}
+\renewcommand{\vec}{\overrightarrow}
+\renewcommand{\Vec}[1]{\symbf{#1}}
 
 \endinput

@@ -15,9 +15,12 @@
 \PassOptionsToPackage{table}{xcolor}
 \RequirePackage{xcolor} % 用于各种颜色环境
 \RequirePackage{graphicx} % 加强插图, 含graphics
-\RequirePackage{amsmath} % 提供数学公式支持
 \RequirePackage{array} % 对表格列格式的扩展。
-
+% 数学
+\RequirePackage{amsmath} % 提供数学公式支持
+% 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
+\RequirePackage{unicode-math}
+\unimathsetup{math-style=ISO}
 
 %% 额外
 
