@@ -1,6 +1,3 @@
-\RequirePackage{kvoptions}
-\RequirePackage{etoolbox}
-
 \SetupKeyvalOptions{family=vMathEnv, prefix=vMathEnv@, setkeys=\kvsetkeys}
 
 \DeclareStringOption[cn]{lang}
@@ -11,10 +8,6 @@
 \DeclareComplementaryOption{plain}{fancy}
 
 \ProcessKeyvalOptions*\relax
-
-\RequirePackage{xcolor}
-% 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
-\RequirePackage{unicode-math}
 
 % 预设置
 \providecommand\vMathEnvLevel{section}

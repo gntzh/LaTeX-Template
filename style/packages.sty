@@ -1,25 +1,34 @@
-\PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage{fontspec}%用于配置字体
+\RequirePackage{xparse}
+\RequirePackage{kvoptions}
+\RequirePackage{etoolbox}
 
-\PassOptionsToPackage{CJKmath}{xeCJK} %公式中直接的中文
-\RequirePackage{xeCJK} %CJK文字支持
+%% 必需
 
-\RequirePackage{ulem} %可换行的下划线
+\PassOptionsToPackage{no-math}{fontspec} % 用于配置字体
+\PassOptionsToPackage{CJKmath}{xeCJK} % 中文支持，CJKmath公式中直接的中文
+\RequirePackage[UTF8, zihao=false, scheme=chinese, heading=true]{ctex}
+% 字体设置
+\setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置主字体
+\setCJKsansfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置无衬线字体
+\setCJKmonofont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置等宽字体
 
-\RequirePackage{graphicx}%加强插图, 含graphics
+\PassOptionsToPackage{table}{xcolor}
+\RequirePackage{xcolor} % 用于各种颜色环境
+\RequirePackage{graphicx} % 加强插图, 含graphics
+\RequirePackage{amsmath} % 提供数学公式支持
+\RequirePackage{array} % 对表格列格式的扩展。
+
+
+%% 额外
+
 \RequirePackage{subfigure}%用于添加子图
 \RequirePackage{pdfpages} %整页插入
 
-\PassOptionsToPackage{table}{xcolor}
-\RequirePackage{xcolor}%用于各种颜色环境
 \RequirePackage{enumitem}%用于定制list和enum
 \RequirePackage{float}%用于控制Float环境，添加H参数（强制放在Here）
 
 \RequirePackage{tikz} % 绘图包
 
-\RequirePackage{amsmath}%提供数学公式支持
-
-\RequirePackage{array} %对表格列格式的扩展。
 \RequirePackage{tabularx}%提供 tabularx 环境排版定宽表格，支持自动计算宽度的 X 列格式。
 \RequirePackage{diagbox} %斜线单元格
 
@@ -32,5 +41,7 @@
 \RequirePackage{appendix}% 用于控制附加文件
 
 \RequirePackage{attachfile2} % 添加附件
+
+\RequirePackage{ulem} %可换行的下划线
 
 \endinput
