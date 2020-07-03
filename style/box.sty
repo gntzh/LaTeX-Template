@@ -1,3 +1,18 @@
-\RequirePackage{tcolorbox}
-\tcbset{arc=1mm} % 圆角
-\tcbuselibrary{most} % most 会自动调取除 minted 和 documentation 之外所有的 tcolorbox 程序库。
+\NewTColorBox{block}{O{success} O{\uppercase{#1}} O{}}{
+  enhanced jigsaw,
+  breakable,
+  sharp corners,
+  boxrule=0em,
+  borderline west={0.5em}{0em}{#1},
+  right=1em,
+  left=1em,
+  toptitle=0.8em,
+  title=#2,
+  fonttitle={\bfseries},
+  coltitle=#1,
+  colback=#1!5,
+  colbacktitle=#1!5,
+  #3
+}
+
+\endinput
