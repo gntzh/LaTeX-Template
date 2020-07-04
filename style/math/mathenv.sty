@@ -1,47 +1,51 @@
-\SetupKeyvalOptions{family=vMathEnv, prefix=vMathEnv@, setkeys=\kvsetkeys}
+%<@@=vMathEnv>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplFile{}{}{}{}
 
-\DeclareStringOption[cn]{lang}
-\DeclareVoidOption{en}{\kvsetkeys{vMathEnv}{lang=en}}
-\DeclareVoidOption{cn}{\kvsetkeys{vMathEnv}{lang=cn}}
+\keys_define:nn {@@}{
+  level.code:n = {\str_set:Nn\@@_level{#1}},
+  level.initial:n = {section},
+  style.choices:nn = {fancy,plain}
+    {\str_set_eq:NN \@@_style \l_keys_choice_tl},
+  style.initial:n={fancy},
+  lang.choices:nn = {en,zh}
+    {\str_set_eq:NN \@@_lang \l_keys_choice_tl},
+  lang/unknown.code:n = {\keys_set:nn{vCode}{lang}},
+  lang.default:n = {en},
+  lang.initial:x = {\lang},
+}
 
-\DeclareBoolOption[true]{fancy}
-\DeclareComplementaryOption{plain}{fancy}
-
-\ProcessKeyvalOptions*\relax
-
-% 预设置
-\providecommand\vMathEnvLevel{section}
+\ProcessKeysOptions{@@}
 
 % 定理环境
-\providecommand{\proofname}{Proof} % {证明}
-\providecommand{\theoremname}{Theorem} % {定理}
-\providecommand{\axiomname}{Axiom} % {公理}
-\providecommand{\lemmaname}{Lemma} % {引理}
-\providecommand{\corollaryname}{Corollary} %{推论}
-\providecommand{\assertionname}{Assertion} %{断言}
-\providecommand{\propositionname}{Proposition} %{命题}
-\providecommand{\definitionname}{Definition} %{定义}
-\providecommand{\examplename}{Example} %{例}
-\providecommand{\remarkname}{Remark} %{注}
-\providecommand{\notename}{Note} %{笔记}
 
-
-\ifdefstring{\vMathEnv@lang}{en}{}{}
-\ifdefstring{\vMathEnv@lang}{cn}{
+\str_if_eq:onTF{\@@_lang}{zh}{
   % \\(.+?)(\{.+?\})(\{.+?\}).*?(\{.+\})
   % \\$1$2$4 % $3
-  \renewcommand*{\proofname}{证明} % {Proof}
-  \renewcommand{\theoremname}{定理} % {Theorem}
-  \renewcommand{\axiomname}{公理} % {Axiom}
-  \renewcommand{\lemmaname}{引理} % {Lemma}
-  \renewcommand{\corollaryname}{推论} % {Corollary}
-  \renewcommand{\assertionname}{断言} % {Assertion}
-  \renewcommand{\propositionname}{命题} % {Proposition}
-  \renewcommand{\definitionname}{定义} % {Definition}
-  \renewcommand{\examplename}{例} % {Example}
-  \renewcommand{\remarkname}{注} % {Remark}
-  \renewcommand{\notename}{笔记} % {Note}
-}{}
+  \def\proofname{证明} % {Proof}
+  \def\theoremname{定理} % {Theorem}
+  \def\axiomname{公理} % {Axiom}
+  \def\lemmaname{引理} % {Lemma}
+  \def\corollaryname{推论} % {Corollary}
+  \def\assertionname{断言} % {Assertion}
+  \def\propositionname{命题} % {Proposition}
+  \def\definitionname{定义} % {Definition}
+  \def\examplename{例} % {Example}
+  \def\remarkname{注} % {Remark}
+  \def\notename{笔记} % {Note}
+}{
+  \def\proofname{Proof} % {证明}
+  \def\theoremname{Theorem} % {定理}
+  \def\axiomname{Axiom} % {公理}
+  \def\lemmaname{Lemma} % {引理}
+  \def\corollaryname{Corollary} %{推论}
+  \def\assertionname{Assertion} %{断言}
+  \def\propositionname{Proposition} %{命题}
+  \def\definitionname{Definition} %{定义}
+  \def\examplename{Example} %{例}
+  \def\remarkname{Remark} %{注}
+  \def\notename{Note} %{笔记}
+}
 
 \RequirePackage{tcolorbox}
 \tcbuselibrary{xparse}
@@ -53,21 +57,21 @@
     colback = white,
     fontupper = \itshape,
     fonttitle = \sffamily\bfseries,
-    lower separated = false,
+    lower~separated = false,
     boxrule = 0.5pt,
     top=8pt,
-    before skip=8pt,
-    attach boxed title to top left={
+    before~skip=8pt,
+    attach~boxed~title~to~top~left={
       yshift=-0.11in,
       xshift=0.15in,
     },
-    boxed title style={
+    boxed~title~style={
       colframe=white,
       boxrule=0pt,
       arc=0pt,
-      outer arc=0pt,
+      outer~arc=0pt,
     },
-    separator sign={.},
+    separator~sign={.},
   },
   defstyle/.style={
     common,
@@ -89,43 +93,43 @@
   },
 }
 
-\ifvMathEnv@fancy
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{theorem}{ o t\label g }{
+\str_if_eq:onTF{\@@_style}{fancy}{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{theorem}{ o t\label g }{
     thmstyle,
-    IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname~\thetcbcounter},
+    IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname \thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{axiom}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{axiom}{ o t\label g }{
     thmstyle,
     IfValueTF={#1}{title={\axiomname~\thetcbcounter\ (#1)}}{title=\axiomname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{lemma}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{lemma}{ o t\label g }{
     thmstyle,
     IfValueTF={#1}{title={\lemmaname~\thetcbcounter\ (#1)}}{title=\lemmaname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{corollary}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{corollary}{ o t\label g }{
     thmstyle,
     IfValueTF={#1}{title={\corollaryname~\thetcbcounter\ (#1)}}{title=\corollaryname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{assertion}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{assertion}{ o t\label g }{
     thmstyle,
     IfValueTF={#1}{title={\assertionname~\thetcbcounter\ (#1)}}{title=\assertionname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{proposition}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{proposition}{ o t\label g }{
     propstyle,
     IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-  \DeclareTColorBox[auto counter,number within=\vMathEnvLevel]{definition}{ o t\label g }{
+  \DeclareTColorBox[auto~counter,number~within=\@@_level]{definition}{ o t\label g }{
     defstyle,
     IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}
   }
-\else
+}{
   \RequirePackage{amsthm}
   \let\proof\relax
   \let\endproof\relax
@@ -138,18 +142,18 @@
     \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
   \theoremstyle{thmstyle} %theorem style
-  \newtheorem{theorem}{\theoremname}[\vMathEnvLevel]
-  \newtheorem{axiom}{\axiomname}[\vMathEnvLevel]
-  \newtheorem{lemma}{\lemmaname}[\vMathEnvLevel]
-  \newtheorem{corollary}{\corollaryname}[\vMathEnvLevel]
-  \newtheorem{assertion}{\assertionname}[\vMathEnvLevel]
+  \newtheorem{theorem}{\theoremname}[\@@_level]
+  \newtheorem{axiom}{\axiomname}[\@@_level]
+  \newtheorem{lemma}{\lemmaname}[\@@_level]
+  \newtheorem{corollary}{\corollaryname}[\@@_level]
+  \newtheorem{assertion}{\assertionname}[\@@_level]
 
   \theoremstyle{defstyle} % definition style
-  \newtheorem{definition}{\definitionname}[\vMathEnvLevel]
+  \newtheorem{definition}{\definitionname}[\@@_level]
 
   \theoremstyle{prostyle} % proposition style
-  \newtheorem{proposition}{\propositionname}[\vMathEnvLevel]
-\fi
+  \newtheorem{proposition}{\propositionname}[\@@_level]
+}
 
 \newenvironment{proof}{
   \par\noindent\textbf{\color{second}\proofname\;}
@@ -159,18 +163,20 @@
   \par
 }
 
-\newcounter{exam}[\vMathEnvLevel]
+\newcounter{exam}[\@@_level]
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \NewDocumentEnvironment{example}{O{}}{
   \refstepcounter{exam}
-  \par\noindent\textbf{\color{main}{\examplename} \theexam #1}\rmfamily
+  \par\noindent
+  {\bfseries\upshape\color{main}{\examplename} \theexam #1}
+  \rmfamily
 }{
   \par\ignorespacesafterend
 }
 
 \NewDocumentEnvironment{remark}{o}{
-  \noindent\textbf{
+  \noindent{\bfseries\upshape
     \color{third}\remarkname
     \IfValueT{#1}{~#1}
   }
@@ -178,10 +184,10 @@
 
 \NewDocumentEnvironment{note}{o}{
   \par\noindent\makebox[-3pt][r]{{\large\color{main!90}\ensuremath{◈}}}
-  \textbf{
+  {\bfseries\upshape
     \color{second}\notename 
     \IfValueT{#1}{~#1}
   }\itshape
 }{\par}
 
-\endinput
+%<@@=>
