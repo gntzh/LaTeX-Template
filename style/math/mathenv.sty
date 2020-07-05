@@ -2,49 +2,57 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplFile{}{}{}{}
 
+\str_new:N \@@_lang_str
+\str_new:N \@@_level_str
+\str_new:N \@@_style_str
+
 \keys_define:nn {@@}{
-  level.code:n = {\str_set:Nn\@@_level{#1}},
-  level.initial:n = {section},
-  style.choices:nn = {fancy,plain}
-    {\str_set_eq:NN \@@_style \l_keys_choice_tl},
-  style.initial:n={fancy},
   lang.choices:nn = {en,zh}
-    {\str_set_eq:NN \@@_lang \l_keys_choice_tl},
+    {\str_set_eq:NN \@@_lang_str \l_keys_choice_tl},
   lang/unknown.code:n = {\keys_set:nn{vCode}{lang}},
-  lang.default:n = {en},
+  lang.default:n = {zh},
   lang.initial:x = {\lang},
+
+  level.code:n = {\str_set:Nn\@@_level_str{#1}},
+  level.initial:n = {section},
+
+  style.choices:nn = {fancy,plain}
+    {\str_set_eq:NN \@@_style_str \l_keys_choice_tl},
+  style.initial:n={fancy},
 }
 
 \ProcessKeysOptions{@@}
 
 % 定理环境
-
-\str_if_eq:onTF{\@@_lang}{zh}{
-  % \\(.+?)(\{.+?\})(\{.+?\}).*?(\{.+\})
-  % \\$1$2$4 % $3
-  \def\proofname{证明} % {Proof}
-  \def\theoremname{定理} % {Theorem}
-  \def\axiomname{公理} % {Axiom}
-  \def\lemmaname{引理} % {Lemma}
-  \def\corollaryname{推论} % {Corollary}
-  \def\assertionname{断言} % {Assertion}
-  \def\propositionname{命题} % {Proposition}
-  \def\definitionname{定义} % {Definition}
-  \def\examplename{例} % {Example}
-  \def\remarkname{注} % {Remark}
-  \def\notename{笔记} % {Note}
-}{
-  \def\proofname{Proof} % {证明}
-  \def\theoremname{Theorem} % {定理}
-  \def\axiomname{Axiom} % {公理}
-  \def\lemmaname{Lemma} % {引理}
-  \def\corollaryname{Corollary} %{推论}
-  \def\assertionname{Assertion} %{断言}
-  \def\propositionname{Proposition} %{命题}
-  \def\definitionname{Definition} %{定义}
-  \def\examplename{Example} %{例}
-  \def\remarkname{Remark} %{注}
-  \def\notename{Note} %{笔记}
+\str_case:on{\@@_lang_str}{
+  {zh}{
+    % \\(.+?)(\{.+?\})(\{.+?\}).*?(\{.+\})
+    % \\$1$2$4 % $3
+    \def\proofname{证明} % {Proof}
+    \def\theoremname{定理} % {Theorem}
+    \def\axiomname{公理} % {Axiom}
+    \def\lemmaname{引理} % {Lemma}
+    \def\corollaryname{推论} % {Corollary}
+    \def\assertionname{断言} % {Assertion}
+    \def\propositionname{命题} % {Proposition}
+    \def\definitionname{定义} % {Definition}
+    \def\examplename{例} % {Example}
+    \def\remarkname{注} % {Remark}
+    \def\notename{笔记} % {Note}
+  }
+  {en}{
+    \def\proofname{Proof} % {证明}
+    \def\theoremname{Theorem} % {定理}
+    \def\axiomname{Axiom} % {公理}
+    \def\lemmaname{Lemma} % {引理}
+    \def\corollaryname{Corollary} %{推论}
+    \def\assertionname{Assertion} %{断言}
+    \def\propositionname{Proposition} %{命题}
+    \def\definitionname{Definition} %{定义}
+    \def\examplename{Example} %{例}
+    \def\remarkname{Remark} %{注}
+    \def\notename{Note} %{笔记}
+  }
 }
 
 \RequirePackage{tcolorbox}
@@ -92,67 +100,69 @@
     colbacktitle=third,
   },
 }
+\str_case:on{\@@_style_str}{
+  {fancy}{
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{theorem}{ o t\label g }{
+      thmstyle,
+      IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname \thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{axiom}{ o t\label g }{
+      thmstyle,
+      IfValueTF={#1}{title={\axiomname~\thetcbcounter\ (#1)}}{title=\axiomname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{lemma}{ o t\label g }{
+      thmstyle,
+      IfValueTF={#1}{title={\lemmaname~\thetcbcounter\ (#1)}}{title=\lemmaname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{corollary}{ o t\label g }{
+      thmstyle,
+      IfValueTF={#1}{title={\corollaryname~\thetcbcounter\ (#1)}}{title=\corollaryname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{assertion}{ o t\label g }{
+      thmstyle,
+      IfValueTF={#1}{title={\assertionname~\thetcbcounter\ (#1)}}{title=\assertionname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{proposition}{ o t\label g }{
+      propstyle,
+      IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+    \DeclareTColorBox[auto~counter,number~within=\@@_level_str]{definition}{ o t\label g }{
+      defstyle,
+      IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
+      IfBooleanTF={#2}{label=#3}{}
+    }
+  }
+  {plain}{
+    \RequirePackage{amsthm}
+    \let\proof\relax
+    \let\endproof\relax
 
-\str_if_eq:onTF{\@@_style}{fancy}{
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{theorem}{ o t\label g }{
-    thmstyle,
-    IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname \thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{axiom}{ o t\label g }{
-    thmstyle,
-    IfValueTF={#1}{title={\axiomname~\thetcbcounter\ (#1)}}{title=\axiomname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{lemma}{ o t\label g }{
-    thmstyle,
-    IfValueTF={#1}{title={\lemmaname~\thetcbcounter\ (#1)}}{title=\lemmaname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{corollary}{ o t\label g }{
-    thmstyle,
-    IfValueTF={#1}{title={\corollaryname~\thetcbcounter\ (#1)}}{title=\corollaryname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{assertion}{ o t\label g }{
-    thmstyle,
-    IfValueTF={#1}{title={\assertionname~\thetcbcounter\ (#1)}}{title=\assertionname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{proposition}{ o t\label g }{
-    propstyle,
-    IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-  \DeclareTColorBox[auto~counter,number~within=\@@_level]{definition}{ o t\label g }{
-    defstyle,
-    IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}
-  }
-}{
-  \RequirePackage{amsthm}
-  \let\proof\relax
-  \let\endproof\relax
+    \newtheoremstyle{defstyle}{3pt}{3pt}{\itshape}{-3pt}{
+      \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
+    \newtheoremstyle{thmstyle}{3pt}{3pt}{\itshape}{-3pt}{
+      \bfseries\color{second}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
+    \newtheoremstyle{prostyle}{3pt}{3pt}{\itshape}{-3pt}{
+      \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
-  \newtheoremstyle{defstyle}{3pt}{3pt}{\itshape}{-3pt}{
-    \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{thmstyle}{3pt}{3pt}{\itshape}{-3pt}{
-    \bfseries\color{second}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{prostyle}{3pt}{3pt}{\itshape}{-3pt}{
-    \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
+    \theoremstyle{thmstyle} %theorem style
+    \newtheorem{theorem}{\theoremname}[\@@_level_str]
+    \newtheorem{axiom}{\axiomname}[\@@_level_str]
+    \newtheorem{lemma}{\lemmaname}[\@@_level_str]
+    \newtheorem{corollary}{\corollaryname}[\@@_level_str]
+    \newtheorem{assertion}{\assertionname}[\@@_level_str]
 
-  \theoremstyle{thmstyle} %theorem style
-  \newtheorem{theorem}{\theoremname}[\@@_level]
-  \newtheorem{axiom}{\axiomname}[\@@_level]
-  \newtheorem{lemma}{\lemmaname}[\@@_level]
-  \newtheorem{corollary}{\corollaryname}[\@@_level]
-  \newtheorem{assertion}{\assertionname}[\@@_level]
+    \theoremstyle{defstyle} % definition style
+    \newtheorem{definition}{\definitionname}[\@@_level_str]
 
-  \theoremstyle{defstyle} % definition style
-  \newtheorem{definition}{\definitionname}[\@@_level]
-
-  \theoremstyle{prostyle} % proposition style
-  \newtheorem{proposition}{\propositionname}[\@@_level]
+    \theoremstyle{prostyle} % proposition style
+    \newtheorem{proposition}{\propositionname}[\@@_level_str]
+  }
 }
 
 \newenvironment{proof}{
@@ -163,7 +173,7 @@
   \par
 }
 
-\newcounter{exam}[\@@_level]
+\newcounter{exam}[\@@_level_str]
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \NewDocumentEnvironment{example}{O{}}{

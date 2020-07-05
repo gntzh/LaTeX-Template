@@ -1,7 +1,8 @@
 # yml后缀不可以
 
 verbatimEnvironments:
-  verbatim: 1
-  lstlisting: 1
-  minted: 1
-  markdown: 1
+  verbatim: true
+  lstlisting: true
+  minted: true
+  code: true
+  markdown: true

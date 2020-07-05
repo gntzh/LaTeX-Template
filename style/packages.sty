@@ -1,6 +1,8 @@
 \RequirePackage{expl3}
 \ProvidesExplFile{}{}{}{}
 
+\providecommand\lang{zh}
+
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
 \RequirePackage{etoolbox}
@@ -11,6 +13,7 @@
 \PassOptionsToPackage{CJKmath}{xeCJK} % 中文支持，CJKmath公式中直接的中文
 \RequirePackage[UTF8, zihao=false, scheme=chinese, heading=true]{ctex}
 % 字体设置
+\setmonofont{Consolas}
 \setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置主字体
 \setCJKsansfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置无衬线字体
 \setCJKmonofont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置等宽字体
