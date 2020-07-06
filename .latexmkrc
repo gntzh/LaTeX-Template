@@ -2,10 +2,13 @@
 $out_dir = "out";
 #$jobname = "main";
 
-# 编译配置
 $pdf_mode = 5;
+
+# 编译命令
 $xelatex = "xelatex -file-line-error -halt-on-error -interaction=nonstopmode --synctex=1 %O --shell-escape %S";
 $xdvipdfmx = "xdvipdfmx -E -o %D %O %S";
+
+$lualatex = "lualatex -file-line-error -halt-on-error -interaction=nonstopmode --synctex=1 %O --shell-escape %S";
 
 # subfiles
 $do_cd = 1;

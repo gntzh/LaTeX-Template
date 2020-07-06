@@ -1,23 +1,21 @@
-\RequirePackage{expl3}
+\RequirePackage{expl3, xparse, l3keys2e}
+%<@@=vPkg>
 \ProvidesExplFile{}{}{}{}
 
-\providecommand\lang{zh}
+\tl_new:N \@@_emojifont
 
-\RequirePackage{kvoptions}
-\RequirePackage{etoolbox}
-\RequirePackage{etoolbox}
+\keys_define:nn {@@}{
+  emoji.tl_set:N = \@@_emojifont,
+  emoji.default:n = {Segoe~UI~Emoji}, % Twemoji Mozilla
+}
+
+\ProcessKeysOptions{@@}
 
 %% 必需
-
-\PassOptionsToPackage{no-math}{fontspec} % 用于配置字体
-\PassOptionsToPackage{CJKmath}{xeCJK} % 中文支持，CJKmath公式中直接的中文
-\RequirePackage[UTF8, zihao=false, scheme=chinese, heading=true]{ctex}
-% 字体设置
+% 配置字体，math font交给unicode-math
+\RequirePackage[no-math]{fontspec}
+\setmainfont{Times~New~Roman}
 \setmonofont{Consolas}
-\setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置主字体
-\setCJKsansfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置无衬线字体
-\setCJKmonofont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi] % 设置等宽字体
-
 \PassOptionsToPackage{table}{xcolor}
 \RequirePackage{xcolor} % 用于各种颜色环境
 \RequirePackage{graphicx} % 加强插图, 含graphics
@@ -55,4 +53,9 @@
 
 \RequirePackage{ulem} % 可换行的下划线
 
-\endinput
+\tl_if_empty:NF \@@_emojifont{
+  \RequirePackage{emoji}
+  \setemojifont{\@@_emojifont}
+}
+
+%<@@=>
