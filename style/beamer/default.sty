@@ -1,0 +1,127 @@
+\RequirePackage{expl3, xparse, l3keys2e}
+%<@@=vbDefault>
+\ProvidesExplFile{}{}{}{}
+
+\keys_define:nn {@@}{
+
+}
+
+\ProcessKeysOptions{@@}
+
+%---------- font ----------%
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont*{subtitle}{size=\large}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+
+% color
+% \setbeamercolor{palette~primary}{fg=primary,bg=textPrimary}
+% \setbeamercolor{palette~secondary}{fg=secondary}
+\setbeamercolor*{structure}{fg=primary}
+\setbeamercolor*{normal~text}{fg=primaryText}
+\setbeamercolor*{title}{parent=normal~text}
+\setbeamercolor*{author}{fg=secondaryText}
+\setbeamercolor*{date}{fg=secondaryText}
+\setbeamercolor*{institute}{fg=secondaryText}
+\setbeamercolor*{item}{fg=primary}
+\setbeamercolor*{alerted~text}{fg=accent}
+\setbeamercolor*{frametitle}{fg=textPrimary,bg=primary}
+\setbeamercolor{navigation~symbols}{use=structure,fg=structure.fg!40!bg}
+\setbeamercolor{navigation~symbols~dimmed}{use=structure,fg=structure.fg!20!bg}
+
+% \setbeamercolor{frametitle}{}
+\setbeamercolor{progress~bar}{parent=alerted~text}
+\setbeamercolor{title~separator}{parent=progress~bar}
+
+%---------- template ----------%
+\setbeamertemplate{enumerate~items}[circle]
+\setbeamertemplate{itemize~items}{\Large\ensuremath{\bullet}}
+\setbeamertemplate{sections/subsections in toc}[circle]
+
+\setbeamertemplate{title~page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \tl_if_empty:NF\inserttitlegraphic{\usebeamertemplate*{title graphic}}
+    \vfill%
+    \tl_if_empty:NF\inserttitle{\usebeamertemplate*{title}}
+    \tl_if_empty:NF\insertsubtitle{\usebeamertemplate*{subtitle}}
+    \usebeamertemplate*{title~separator}
+    \tl_if_empty:NF\beamer@shortauthor{\usebeamertemplate*{author}}
+    \tl_if_empty:NF\insertdate{\usebeamertemplate*{date}}
+    \tl_if_empty:NF\insertinstitute{\usebeamertemplate*{institute}}
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+\setbeamertemplate{title}{
+  \raggedright
+  \linespread{1.0}
+  \inserttitle
+  \par
+  \vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+  \raggedright
+  \insertsubtitle
+  \par
+  \vspace*{0.5em}
+}
+\setbeamertemplate{title~separator}{
+  \color{fg} \rule{\textwidth}{0.6pt}\par
+}
+\setbeamertemplate{author}{
+  \vspace*{2em}
+  \insertauthor
+  \par
+  \vspace*{0.25em}
+}
+\setbeamertemplate{date}{\insertdate\par}
+\setbeamertemplate{institute}{
+  \vspace*{3mm}
+  \insertinstitute
+  \par
+}
+
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation~symbols}{}
+\setbeamertemplate{footline}{
+  {\usebeamercolor[fg]{navigation~symbols}
+      \hspace*{1em}
+      \insertslidenavigationsymbol
+      \insertframenavigationsymbol
+      \insertsubsectionnavigationsymbol
+      \insertsectionnavigationsymbol
+      \insertdocnavigationsymbol}
+  \hfill
+  {\color{secondaryText}
+    \insertframenumber/\inserttotalframenumber
+    \hspace*{1em}
+  }
+}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{tcolorbox}[
+      enhanced,
+      boxsep=0mm,
+      boxrule=0mm,
+      nobeforeafter,
+      sharp~corners,
+      colback=bg,
+      coltext=fg,
+      enlarge~left~by=-\beamer@leftmargin,
+      width=\paperwidth,
+    ]
+    \insertframetitle
+    \tl_if_empty:NF\insertframesubtitle{
+      \textnormal{\\\small\insertframesubtitle}
+    }
+    \nolinebreak
+  \end{tcolorbox}
+}
+
+% \setbeamertemplate{sections/subsections~in~toc}[circle]
+
+%<@@=>
