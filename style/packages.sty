@@ -3,9 +3,15 @@
 \ProvidesExplFile{}{}{}{}
 
 \tl_new:N \@@_emojifont
+\tl_new:N \@@_nerdfont
+
+\bool_new:N\@@_beamber
 
 \keys_define:nn {@@}{
-  emoji.tl_set:N = \@@_emojifont,
+  beamer.bool_set:N = \@@_beamber,
+  beamer.default:n  = {true},
+  NF.tl_set:N = \@@_nerdfont,
+  emoji.tl_set:N  = \@@_emojifont,
   emoji.default:n = {Segoe~UI~Emoji}, % Twemoji Mozilla
 }
 
@@ -30,17 +36,36 @@
 \RequirePackage{tcolorbox}
 \tcbuselibrary{many}
 
+\bool_if:NTF\@@_beamber{
+  %% Beamer 必需
+  \RequirePackage{tikz}
+  \tcbuselibrary{many}
+  %% Beamer 额外
+}
+%% 与Beamer有冲突
+{
+  %% 非Beamer 必需
+  \RequirePackage{enumitem}% 用于定制list和enum
+  %% 非Beamer 额外
+}
+
 %% 额外
 
-% \RequirePackage{enumitem}%用于定制list和enum
-\RequirePackage{float}%用于控制Float环境，添加H参数（强制放在Here）
+\RequirePackage{float}% 用于控制Float环境，添加H参数（强制放在Here）
 
-\RequirePackage{tikz} % 绘图包
+\RequirePackage{tikz}% 绘图包
 
 \RequirePackage[numbers,sort,super,square]{natbib} % 引用
 
-\RequirePackage{geometry} % 用于控制版式，设置为Word的默认样式
-\RequirePackage{fancyhdr} % 用于排版页眉页脚, 需放在geometry后面
+\RequirePackage{geometry}% 用于控制版式，设置为Word的默认样式
+\RequirePackage{fancyhdr}% 用于排版页眉页脚, 需放在geometry后面
+
+\tl_if_empty:NF \@@_nerdfont{
+  \newfontface\nerdfont{\@@_nerdfont}
+  % TODO 完善\nf命令，作为图标使用
+  \newcommand\nf[1]{{\nerdfont #1}}
+  % https://www.nerdfonts.com/cheat-sheet
+}
 
 \tl_if_empty:NF \@@_emojifont{
   \RequirePackage{emoji}
