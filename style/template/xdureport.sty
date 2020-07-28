@@ -1,0 +1,31 @@
+%<@@=xduReport>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplFile{}{}{}{}
+\RequirePackage{xpatch}
+%% 搭配article类~~~
+%% CTeX要求
+% zihao=-4
+%% 其他要求
+% 主字体为宋体
+\DeclareDocumentCommand{\maketitle}{}{
+  \thispagestyle{empty}
+  \begin{center}
+    {\zihao{3}\bfseries\sffamily\@title}
+    \vskip 2ex
+    {\zihao{4}\@author}
+  \end{center}
+  \vskip 2ex
+}
+
+\ctexset{
+  abstractname = {\zihao{4}\bfseries 摘要},
+}
+
+\xpatchcmd{\abstract}{\small}{\zihao{-4}}{}{}
+
+\NewDocumentCommand{\keywords}{m}{
+  {\zihao{4}\bfseries 关键词：#1}
+}
+
+% \linespread{1.3}
+%<@@=>

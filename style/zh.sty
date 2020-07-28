@@ -21,7 +21,16 @@
 \ProcessKeysOptions{@@}
 
 \PassOptionsToPackage{CJKmath}{xeCJK} % 中文支持，CJKmath公式中直接的中文
-\RequirePackage[scheme=chinese, heading=true, fontset=none]{ctex}
+\RequirePackage[fontset=none]{ctex}
+
+\ctexset{
+  abstractname = {本文概要},
+  bibname = {参考文献},
+  % refname = {参考文献},
+}
+% ctex的设置在natbib后会失效
+% \def\bibname{参考文献}
+% \def\refname{参考文献}
 
 % 字体设置
 \tl_if_empty:NTF\@@_shssuffix{
@@ -65,7 +74,6 @@
 % \renewcommand\contentsname{\centering\textbf{目录}} %Contents
 % \renewcommand\listfigurename{\centering\textbf{插图目录}}
 % \renewcommand\listtablename{\centering\textbf{表格目录}}
-% \renewcommand\refname{\centering\textbf{参考文献}}
 % \renewcommand\indexname{索引}
 % \renewcommand\figurename{图}
 % \renewcommand\tablename{表}

@@ -1,6 +1,6 @@
 \def\lang{zh}
 \usepackage[
-  NF={CaskaydiaCove NF}
+  % NF={CaskaydiaCove NF}
 ]{./style/packages}
 \setmathfont{Cambria Math} % Office携带
 \setlist{nosep} % 清楚列表间距
@@ -31,19 +31,13 @@
 }
 
 \usepackage{./style/macro}
+
+\PassOptionsToPackage{
+  scheme=chinese, heading=true, zihao=-4
+}{ctex}
 \usepackage[SHS]{./style/zh}
 % \addinputpath{./content/}
 % graphics path
 \graphicspath{{./img}}
 
 \usepackage{./style/subfile}
-
-%% 易引起兼容性冲突
-% 用于超链接，另外添加该包目录会自动添加引用。
-\usepackage{hyperref}
-\hypersetup{
-  unicode, psdextra,
-  citecolor=green,
-  % linkcolor=airforceblue,
-  % urlcolor=blue,anchorcolor=blue,
-}

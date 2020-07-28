@@ -19,9 +19,12 @@
 
 %% 必需
 % 配置字体，math font交给unicode-math
-\RequirePackage[no-math]{fontspec}
+
+\PassOptionsToPackage{no-math}{fontspec}
+\RequirePackage{fontspec}
 \setmainfont{Times~New~Roman}
 \setmonofont{Consolas}
+
 \PassOptionsToPackage{table}{xcolor}
 \RequirePackage{xcolor} % 用于各种颜色环境
 \RequirePackage{graphicx} % 加强插图, 含graphics
@@ -55,12 +58,12 @@
 
 \RequirePackage{tikz}% 绘图包
 
-\RequirePackage[numbers,sort,super,square]{natbib} % 引用
 
 \RequirePackage{geometry}% 用于控制版式，设置为Word的默认样式
 \RequirePackage{fancyhdr}% 用于排版页眉页脚, 需放在geometry后面
 
 \tl_if_empty:NF \@@_nerdfont{
+  % FIXME 莫名原因
   \newfontface\nerdfont{\@@_nerdfont}
   % TODO 完善\nf命令，作为图标使用
   \newcommand\nf[1]{{\nerdfont #1}}
@@ -70,6 +73,15 @@
 \tl_if_empty:NF \@@_emojifont{
   \RequirePackage{emoji}
   \setemojifont{\@@_emojifont}
+}
+
+
+\AtEndPreamble{
+  % 引用
+  \RequirePackage[numbers,sort,super,square]{natbib} 
+  \bibliographystyle{abbrvnat}
+  % 书签
+  \RequirePackage{bookmark}
 }
 
 %<@@=>
