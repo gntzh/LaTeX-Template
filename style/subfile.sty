@@ -1,3 +1,16 @@
+%<@@=vSubfile>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplFile{}{}{}{}
+
+\bool_new:N\@@_minted
+
+\keys_define:nn {@@}{
+  minted.bool_set:N = \@@_minted,
+  minted.default:n  = {true},
+}
+
+\ProcessKeysOptions{@@}
+
 \RequirePackage{subfiles}
 
 \renewcommand{\import}    {\global\let\import@path\@empty \@doimport\input@alt}
@@ -29,7 +42,18 @@
 \def\replace@first#1#2{%
   \def\@tempa{#2}%
   \expandafter\protected@edef\expandafter#1\expandafter
-    {\expandafter\@tempa\expandafter\@gobble#1}%
+  {\expandafter\@tempa\expandafter\@gobble#1}%
+}
+
+\bool_if:NT\@@_minted{
+  \RequirePackage{xpatch}
+  % src: https://zhuanlan.zhihu.com/p/39117864
+  \xpatchcmd
+  {\inputminted}
+  {#3}
+  {\import@path#3}
+  {}{}
 }
 
 \endinput
+%<@@=>
