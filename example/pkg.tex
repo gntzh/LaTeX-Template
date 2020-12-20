@@ -30,7 +30,11 @@
 
 %---------- PGF/TiKz ----------%
 \usepackage[external]{forest}% 树形图
-
+\usepackage{karnaugh-map}% 卡诺图
+\usepackage[siunitx, RPvoltages]{circuitikz}% 电路图
+\ctikzset{
+    logic ports=ieee,
+}
 
 %---------- PDF扩展 ----------%
 %% 添加附件
