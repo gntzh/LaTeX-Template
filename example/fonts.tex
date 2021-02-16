@@ -1,4 +1,25 @@
 %---------- 组合 ----------%
 
 %---------- Unicode Math ----------%
-\setmathfont{Cambria Math} % Office携带
+\setmathfont{Cambria Math} % Office 携带
+
+%%%%%%%%%%% 楷体和仿宋 %%%%%%%%%%%
+%---------- Fandol ----------%
+\newCJKfontfamily\kai{\kaifontname}[
+  BoldFont = *,
+  ItalicFont = *,
+  BoldItalicFont = *
+]
+\newCJKfontfamily\fang{\fangfontname}[
+  BoldFont = *,
+  ItalicFont = *,
+  BoldItalicFont = *
+]
+
+%%%%%%%%%%% CJK 字体 %%%%%%%%%%%
+%---------- Fandol ----------%
+\usepackage[fontset=fandol]{ctex}
+
+%---------- SourceHan ----------%
+
+%---------- English ----------%
