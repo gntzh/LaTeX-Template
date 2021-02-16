@@ -28,6 +28,12 @@
 \usepackage{mathtools}% 简化、增强数学公式
 \usepackage{witharrows}% 箭头标注
 
+%---------- TiKz Lib----------%
+\usepackage{tikz}
+\usetikzlibrary{external}% 保存所画图形
+\tikzexternalize[prefix=out/tikz/,optimize command away=\includepdf]
+\tcbset{shield externalize} % 屏蔽layer层的externalize, 避免与tcolorbox的冲突
+
 %---------- PGF/TiKz ----------%
 \usepackage[external]{forest}% 树形图
 \usepackage{karnaugh-map}% 卡诺图

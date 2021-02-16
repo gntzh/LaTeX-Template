@@ -42,8 +42,7 @@
 
 ## Build tool directories for auxiliary files
 # latexrun
-out/
-tikz/
+latex.out/
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
@@ -283,3 +282,6 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+## Build tool directories
+out/

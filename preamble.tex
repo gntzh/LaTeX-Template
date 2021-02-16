@@ -16,10 +16,6 @@
 % 定理类环境
 \usepackage{./style/math/mathenv}
 
-\usetikzlibrary{external}
-\tikzexternalize[prefix=tikz/,optimize command away=\includepdf]
-\tcbset{shield externalize} % 屏蔽layer层的externalize, 避免与tcolorbox的冲突
-
 % 公式间距
 \AtBeginDocument{ % 设置在这里或者\normalsize有效
   \setlength{\abovedisplayskip}{5pt}
