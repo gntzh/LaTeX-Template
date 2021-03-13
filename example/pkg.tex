@@ -1,9 +1,10 @@
 %---------- 表格 ----------%
-\usepackage{diagbox}% 斜线单元格
 \usepackage{booktabs}% 三线表
+\usepackage{diagbox}% 斜线单元格
 \usepackage{tabularx}% 均分列宽
 
 %---------- 图片 ----------%
+\usepackage{pdfpages}% 插入整页pdf
 \usepackage{subfig}% 用于添加子图
 
 %---------- 浮动体 ---------%
@@ -21,8 +22,16 @@
 \usepackage{transparent}% 提供透明颜色
 
 %---------- 分栏 ----------%
-\usepackage{paracol}% 多栏对齐排版
 \usepackage{multicol}% 多栏排版
+\usepackage{paracol}% 多栏对齐排版
+
+%---------- 引用 ----------%
+\usepackage[style=gb7714-2015]{biblatex}
+% 注意
+% 与 subfiles 使用，需要补丁
+\addbibresource{\subfix{ref.bib}}
+% report/book使用refsection，默认的是\bibnam，需要再定义\refname
+\providecommand{\refname}{参考文献}
 
 %---------- 公式 ----------%
 \usepackage{mathtools}% 简化、增强数学公式
@@ -35,12 +44,16 @@
 \tcbset{shield externalize} % 屏蔽layer层的externalize, 避免与tcolorbox的冲突
 
 %---------- PGF/TiKz ----------%
-\usepackage[external]{forest}% 树形图
-\usepackage{karnaugh-map}% 卡诺图
 \usepackage[siunitx, RPvoltages]{circuitikz}% 电路图
 \ctikzset{
     logic ports=ieee,
 }
+\usepackage[external]{forest}% 树形图
+\usepackage{karnaugh-map}% 卡诺图
+
+%---------- 非 TiKz 作图 ----------%
+\usepackage{schemata}% 分类图，与 unicode-math 冲突，应在其后再导入
+
 
 %---------- PDF扩展 ----------%
 %% 添加附件
@@ -49,7 +62,6 @@
 \usepackage{embedfile}
 
 %---------- 其他 ----------%
-\usepackage{pdfpages}% 插入整页pdf
 
 %---------- 辅助工具 ----------%
 \usepackage{zhlipsum}% 中文测试

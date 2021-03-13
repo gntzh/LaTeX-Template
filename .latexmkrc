@@ -10,6 +10,8 @@ $xdvipdfmx = "xdvipdfmx -E -o %D %O %S";
 
 $lualatex = "lualatex -file-line-error -halt-on-error -interaction=nonstopmode --synctex=1 %O --shell-escape %S";
 
+$biber = "biber --winunicode %O %S";
+
 # subfiles
 $do_cd = 1;
 
