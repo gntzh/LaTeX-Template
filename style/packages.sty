@@ -1,10 +1,8 @@
 \RequirePackage{expl3, xparse, l3keys2e}
 %<@@=vPkg>
 \ProvidesExplFile{}{}{}{}
-
 \tl_new:N \@@_emojifont
 \tl_new:N \@@_nerdfont
-
 \bool_new:N\@@_beamber
 
 \keys_define:nn {@@}{
@@ -14,28 +12,14 @@
   emoji.tl_set:N  = \@@_emojifont,
   emoji.default:n = {Segoe~UI~Emoji}, % Twemoji Mozilla
 }
-
 \ProcessKeysOptions{@@}
-
-%% 必需
-% 配置字体，math font交给unicode-math
-
-\PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage{fontspec}
-
-\PassOptionsToPackage{table}{xcolor}
-\RequirePackage{xcolor} % 用于各种颜色环境
-\RequirePackage{graphicx} % 加强插图, 含graphics
-\RequirePackage{array} % 对表格列格式的扩展。
-% 数学
-\RequirePackage{amsmath} % 提供数学公式支持
-% 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
-\RequirePackage{unicode-math}
-\unimathsetup{math-style=ISO}
-
-% 功能极其强大的box
-\RequirePackage{tcolorbox}
-\tcbuselibrary{many}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{amsmath}
+\RequirePackage[math-style=ISO]{unicode-math}
+\RequirePackage[many]{tcolorbox}
 
 \bool_if:NTF\@@_beamber{
   %% Beamer 必需
@@ -48,14 +32,10 @@
   \RequirePackage{enumitem}% 用于定制list和enum
   %% 非Beamer 额外
 }
-
-%% 额外
-
-\RequirePackage{float}% 用于控制Float环境，添加H参数（强制放在Here）
-
-\RequirePackage{geometry}% 用于控制版式，设置为Word的默认样式
-\RequirePackage{fancyhdr}% 用于排版页眉页脚, 需放在geometry后面
-
+%---------- 额外 ----------%
+\RequirePackage{float}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
 \tl_if_empty:NF \@@_nerdfont{
   % FIXME 莫名原因
   \newfontface\nerdfont{\@@_nerdfont}
@@ -63,14 +43,11 @@
   \newcommand\nf[1]{{\nerdfont #1}}
   % https://www.nerdfonts.com/cheat-sheet
 }
-
 \tl_if_empty:NF \@@_emojifont{
   \RequirePackage{emoji}
   \setemojifont{\@@_emojifont}
 }
-
 \AtEndPreamble{
-  % 书签
   \RequirePackage{bookmark}
 }
 %<@@=>

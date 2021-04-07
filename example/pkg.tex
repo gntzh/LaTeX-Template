@@ -1,7 +1,23 @@
+%---------- 几乎必须 ----------%
+\usepackage[no-math]{fontspec}% 西文字体设置
+\usepackage{xcolor}% 用于各种颜色环境
+\usepackage{graphicx}% 加强插图, 含graphics
+\graphicspath{{img/}}% 设置图片检索路径
+\usepackage{array}% 对表格列格式的扩展。
+\usepackage{amsmath}% 提供数学公式支持
+% 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
+\usepackage[math-style=ISO]{unicode-math}
+\usepackage{bookmark}% 书签增强，一次编译，随意添加
+
+%---------- 广泛 ----------%
+\usepackage{float}% Float环境H参数
+\usepackage{tcolorbox}% 高度可配置的彩色盒子
+
 %---------- 表格 ----------%
 \usepackage{booktabs}% 三线表
 \usepackage{diagbox}% 斜线单元格
 \usepackage{tabularx}% 均分列宽
+\PassOptionsToPackage{table}{xcolor}% 有色表格 加载colortbl
 
 %---------- 图片 ----------%
 \usepackage{pdfpages}% 插入整页pdf
@@ -18,12 +34,16 @@
 \usepackage{endnote}% 可断行下划线
 \usepackage{indentfirst}% 首段缩进
 
-%---------- 其他样式 ----------%
-\usepackage{transparent}% 提供透明颜色
+%---------- 布局样式 ----------%
+\usepackage{geometry}% 控制版式
+\usepackage{fancyhdr}% 排版页眉页脚, 需放在geometry后面
 
 %---------- 分栏 ----------%
 \usepackage{multicol}% 多栏排版
 \usepackage{paracol}% 多栏对齐排版
+
+%---------- 其他样式 ----------%
+\usepackage{transparent}% 提供透明颜色
 
 %---------- 引用 ----------%
 \usepackage[style=gb7714-2015]{biblatex}
@@ -53,7 +73,6 @@
 
 %---------- 非 TiKz 作图 ----------%
 \usepackage{schemata}% 分类图，与 unicode-math 冲突，应在其后再导入
-
 
 %---------- PDF扩展 ----------%
 %% 添加附件

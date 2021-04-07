@@ -20,16 +20,11 @@
 \definecolor{info}{HTML}{3399ff}
 \definecolor{warning}{HTML}{e7c000}
 \definecolor{danger}{HTML}{cc0000}
-
 \PassOptionsToPackage{outputdir=out}{minted}
+
 \usepackage{./style/code}
 \usepackage{./style/box}
-
-% 数学
-\usepackage{./style/math/math}
-% 定理类环境
 \usepackage{./style/math/mathenv}
-
 % 公式间距
 \AtBeginDocument{% 设置在这里或者\normalsize有效
   \setlength{\abovedisplayskip}{5pt}
@@ -37,14 +32,5 @@
   \setlength{\abovedisplayshortskip}{3pt}
   \setlength{\belowdisplayshortskip}{3pt}
 }
-
-\usepackage{./style/macro}
-
-% \addinputpath{./content/}
-% graphics path
 \graphicspath{{./img}}
-
-% extra
-% \usepackage{./style/extra/markdown}
-
 \usepackage[minted]{./style/subfile}
