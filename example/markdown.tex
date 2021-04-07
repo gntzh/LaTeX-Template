@@ -2,13 +2,9 @@
 % paralist(enumitem)，后者更广泛，tightLists=false关闭paralist
 %% 输出
 % 默认\def\markdownOptionOutputDir{.}
-
-\ProvidesExplFile{}{}{}{}
-
-\RequirePackage[tightLists=false]{markdown}
+\usepackage[tightLists=false]{markdown}
 \renewcommand\markdownOptionOutputDir{./out}
-
 \markdownSetup{
-    smartEllipses=true,
-    inlineFootnotes=true,
+  smartEllipses=true,
+  inlineFootnotes=true,
 }

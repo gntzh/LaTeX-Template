@@ -11,10 +11,6 @@
 \bool_if:NT\@@_minted{
   \RequirePackage{xpatch}
   % src: https://zhuanlan.zhihu.com/p/39117864
-  \xpatchcmd
-  {\inputminted}
-  {#3}
-  {\import@path#3}
-  {}{}
+  \xpatchcmd{\inputminted}{#3}{\import@path#3}{}{}
 }
 %<@@=>
