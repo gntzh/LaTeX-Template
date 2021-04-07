@@ -1,34 +1,39 @@
 \PassOptionsToPackage{
   fontset=none,
-  heading=true
+  heading=true,
 }{ctex}
 {%- if cookiecutter.minted == "True" %}
 \PassOptionsToPackage{outputdir=out}{minted}
-{% endif %}
+{%- endif %}
 {%- if cookiecutter.biblatex == "True" %}
 \PassOptionsToPackage{style=gb7714-2015}{biblatex}
-{% endif %}
-{%- raw -%}
+{%- endif %}
+{% raw -%}
 \usepackage{./styles}
 \usepackage{ctex}
 \unimathsetup{math-style=ISO}
 \graphicspath{{img/}}
+
+%%%%%%%%%% 页面布局 %%%%%%%%%%
+\geometry{a4paper,hmargin=3.18cm,vmargin=2.54cm}
+
 %%%%%%%%%% Font %%%%%%%%%%
 \setmainfont{IBM Plex Serif}
 \setsansfont{IBM Plex Sans}
 \setmonofont{IBM Plex Mono}
 \setCJKmainfont{Source Han Serif SC}[
-    UprightFont = *-Regular,
-    BoldFont = *-Bold,
-    ItalicFont = 方正楷体简体,
-    BoldItalicFont = 方正楷体简体,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = 方正楷体简体,
+  BoldItalicFont = 方正楷体简体,
 ]
 \setCJKsansfont{Source Han Sans SC}[
-    UprightFont = *-Regular,
-    BoldFont = *-Bold,
-    ItalicFont = 方正楷体简体,
-    BoldItalicFont = 方正楷体简体,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = 方正楷体简体,
+  BoldItalicFont = 方正楷体简体,
 ]
+
 %%%%%%%%%% Color theme %%%%%%%%%%
 \definecolor{structure}{RGB}{31,186,190}
 \definecolor{main}{RGB}{59,180,5}
@@ -45,28 +50,23 @@
   \setlength{\abovedisplayshortskip}{3pt}
   \setlength{\belowdisplayshortskip}{3pt}
 }
-{% endraw %}
+{%- endraw %}
 
 \AtEndPreamble{
   \usepackage{subfiles}
-
   {% if cookiecutter.minted == "True" -%}
   {% raw -%}
   \usepackage{xpatch}
   \xpatchcmd{\inputminted}{#3}{\import@path#3}{}{}
   {%- endraw %}
   {%- endif %}
-
   {% if cookiecutter.biblatex == "True" -%}
   \addbibresource{\subfix{references.bib}}
   {%- endif %}
-
-  {% raw -%}
   \usepackage{bookmark}
   \hypersetup{
     colorlinks,
     bookmarksnumbered=true,
     pdfstartview=FitH,
   }
-  {%- endraw %}
 }
