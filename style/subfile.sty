@@ -1,50 +1,13 @@
 %<@@=vSubfile>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplFile{}{}{}{}
-
 \bool_new:N\@@_minted
-
 \keys_define:nn {@@}{
   minted.bool_set:N = \@@_minted,
   minted.default:n  = {true},
 }
-
 \ProcessKeysOptions{@@}
-
 \RequirePackage{subfiles}
-
-\renewcommand{\import}    {\global\let\import@path\@empty \@doimport\input@alt}
-\renewcommand{\inputfrom} {\global\let\import@path\@empty \@doimport\input@alt}
-\renewcommand{\subimport}   {\@doimport\input@alt}
-\renewcommand{\subinputfrom}{\@doimport\input@alt}
-
-% e.g. \import{./subdir}{subfile} => \input@alt{./subdir/subfile}
-\def\input@alt#1{%
-  \InputIfFileExists{#1}{}{%
-    % if dot is not in #1 (except for the first token), then try alternatives
-    \expandafter\in@\expandafter{\expandafter.\expandafter}\expandafter{\@gobble#1}%
-    \ifin@
-    \else
-      % replace subdir stored in input@path
-      \replace@first\input@path{{#1/}}%
-      \replace@first\Ginput@path{{#1/}}%
-      % try alternatives
-      \InputIfFileExists{#1/index}{}{%
-        \InputIfFileExists{#1/main}{}{%
-          \PackageError{import}{File alternatives of `#1' not found}{}%
-        }%
-      }%
-    \fi
-  }%
-}
-
-% replace first token in #1 by #2
-\def\replace@first#1#2{%
-  \def\@tempa{#2}%
-  \expandafter\protected@edef\expandafter#1\expandafter
-  {\expandafter\@tempa\expandafter\@gobble#1}%
-}
-
 \bool_if:NT\@@_minted{
   \RequirePackage{xpatch}
   % src: https://zhuanlan.zhihu.com/p/39117864
@@ -54,6 +17,4 @@
   {\import@path#3}
   {}{}
 }
-
-\endinput
 %<@@=>
