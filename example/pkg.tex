@@ -1,10 +1,12 @@
 %---------- 几乎必须 ----------%
-\usepackage[no-math]{fontspec}% 西文字体设置
 \usepackage{xcolor}% 用于各种颜色环境
 \usepackage{graphicx}% 加强插图, 含graphics
 \graphicspath{{img/}}% 设置图片检索路径
 \usepackage{array}% 对表格列格式的扩展。
 \usepackage{amsmath}% 提供数学公式支持
+\usepackage{fontspec}% 西文字体设置
+% 注意，no-math无法直接在Package option list中写
+\PassOptionsToPackage{no-math}{fontspec}
 % 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
 \usepackage[math-style=ISO]{unicode-math}
 \usepackage{bookmark}% 书签增强，一次编译，随意添加

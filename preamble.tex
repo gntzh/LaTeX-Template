@@ -10,7 +10,22 @@
 \setlist{nosep}% 清楚列表间距
 %%%%%%%%%% 页面布局 %%%%%%%%%%
 \geometry{a4paper,hmargin=3.18cm,vmargin=2.54cm}
-
+%%%%%%%%%% Font %%%%%%%%%%
+\setmainfont{IBM Plex Serif}
+\setsansfont{IBM Plex Sans}
+\setmonofont{IBM Plex Mono}
+\setCJKmainfont{Source Han Serif SC}[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = 方正楷体简体,
+    BoldItalicFont = 方正楷体简体,
+]
+\setCJKsansfont{Source Han Sans SC}[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = 方正楷体简体,
+    BoldItalicFont = 方正楷体简体,
+]
 %%%%%%%%%% Color theme %%%%%%%%%%
 \definecolor{structure}{RGB}{31,186,190}
 \definecolor{main}{RGB}{59,180,5}
@@ -20,8 +35,15 @@
 \definecolor{info}{HTML}{3399ff}
 \definecolor{warning}{HTML}{e7c000}
 \definecolor{danger}{HTML}{cc0000}
-\PassOptionsToPackage{outputdir=out}{minted}
+% 公式间距
+\AtBeginDocument{% 设置在这里或者\normalsize有效
+  \setlength{\abovedisplayskip}{5pt}
+  \setlength{\belowdisplayskip}{5pt}
+  \setlength{\abovedisplayshortskip}{3pt}
+  \setlength{\belowdisplayshortskip}{3pt}
+}
 
+\PassOptionsToPackage{outputdir=out}{minted}
 \usepackage{./style/code}
 \usepackage{./style/box}
 \usepackage{./style/math/mathenv}
@@ -34,3 +56,10 @@
 }
 \graphicspath{{./img}}
 \usepackage[minted]{./style/subfile}
+\AtEndPreamble{
+  \hypersetup{
+    colorlinks,
+    bookmarksnumbered=true,
+    pdfstartview=FitH,
+  }
+}
