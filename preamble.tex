@@ -1,14 +1,25 @@
 \def\lang{zh}
 \usepackage[
-  scheme=chinese, heading=true, zihao=-4
+  scheme=chinese,
+  heading=true,
+  zihao=-4
 ]{ctex}
 \usepackage[
   % NF={CaskaydiaCove NF}
 ]{./style/packages}
 \setlist{nosep}% 清楚列表间距
+%%%%%%%%%% 页面布局 %%%%%%%%%%
+\geometry{a4paper,hmargin=3.18cm,vmargin=2.54cm}
 
-\usepackage{./style/format}
-\usepackage{./style/theme}
+%%%%%%%%%% Color theme %%%%%%%%%%
+\definecolor{structure}{RGB}{31,186,190}
+\definecolor{main}{RGB}{59,180,5}
+\definecolor{second}{RGB}{175,153,8}
+\definecolor{third}{RGB}{244,105,102}
+\definecolor{success}{HTML}{42b983}
+\definecolor{info}{HTML}{3399ff}
+\definecolor{warning}{HTML}{e7c000}
+\definecolor{danger}{HTML}{cc0000}
 
 \PassOptionsToPackage{outputdir=out}{minted}
 \usepackage{./style/code}
