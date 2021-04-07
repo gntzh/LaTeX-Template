@@ -1,7 +1,6 @@
 %<@@=vCode>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplFile{}{}{}{}
-
 \bool_new:N \@@_minted_bool
 \bool_new:N \@@_listings_bool
 
@@ -12,7 +11,6 @@
   listings.bool_set:N = \@@_listings_bool,
   listings.default:n  = {false},
 }
-
 \ProcessKeysOptions{@@}
 
 \bool_if:NT\@@_minted_bool{

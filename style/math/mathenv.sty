@@ -20,38 +20,34 @@
     {\str_set_eq:NN \@@_style_str \l_keys_choice_tl},
   style.initial:n={fancy},
 }
-
 \ProcessKeysOptions{@@}
 
-% 定理环境
 \str_case:on{\@@_lang_str}{
   {zh}{
-    % \\(.+?)(\{.+?\})(\{.+?\}).*?(\{.+\})
-    % \\$1$2$4 % $3
-    \def\proofname{证明} % {Proof}
-    \def\theoremname{定理} % {Theorem}
-    \def\axiomname{公理} % {Axiom}
-    \def\lemmaname{引理} % {Lemma}
-    \def\corollaryname{推论} % {Corollary}
-    \def\assertionname{断言} % {Assertion}
-    \def\propositionname{命题} % {Proposition}
-    \def\definitionname{定义} % {Definition}
-    \def\examplename{例} % {Example}
-    \def\remarkname{注} % {Remark}
-    \def\notename{笔记} % {Note}
+    \def\proofname{证明}% {Proof}
+    \def\theoremname{定理}% {Theorem}
+    \def\axiomname{公理}% {Axiom}
+    \def\lemmaname{引理}% {Lemma}
+    \def\corollaryname{推论}% {Corollary}
+    \def\assertionname{断言}% {Assertion}
+    \def\propositionname{命题}% {Proposition}
+    \def\definitionname{定义}% {Definition}
+    \def\examplename{例}% {Example}
+    \def\remarkname{注}% {Remark}
+    \def\notename{笔记}% {Note}
   }
   {en}{
-    \def\proofname{Proof} % {证明}
-    \def\theoremname{Theorem} % {定理}
-    \def\axiomname{Axiom} % {公理}
-    \def\lemmaname{Lemma} % {引理}
-    \def\corollaryname{Corollary} %{推论}
-    \def\assertionname{Assertion} %{断言}
-    \def\propositionname{Proposition} %{命题}
-    \def\definitionname{Definition} %{定义}
-    \def\examplename{Example} %{例}
-    \def\remarkname{Remark} %{注}
-    \def\notename{Note} %{笔记}
+    \def\proofname{Proof}% {证明}
+    \def\theoremname{Theorem}% {定理}
+    \def\axiomname{Axiom}% {公理}
+    \def\lemmaname{Lemma}% {引理}
+    \def\corollaryname{Corollary}% {推论}
+    \def\assertionname{Assertion}% {断言}
+    \def\propositionname{Proposition}% {命题}
+    \def\definitionname{Definition}% {定义}
+    \def\examplename{Example}% {例}
+    \def\remarkname{Remark}% {注}
+    \def\notename{Note}% {笔记}
   }
 }
 
@@ -150,17 +146,17 @@
     \newtheoremstyle{prostyle}{3pt}{3pt}{\itshape}{-3pt}{
       \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
-    \theoremstyle{thmstyle} %theorem style
+    \theoremstyle{thmstyle}% theorem style
     \newtheorem{theorem}{\theoremname}[\@@_level_str]
     \newtheorem{axiom}{\axiomname}[\@@_level_str]
     \newtheorem{lemma}{\lemmaname}[\@@_level_str]
     \newtheorem{corollary}{\corollaryname}[\@@_level_str]
     \newtheorem{assertion}{\assertionname}[\@@_level_str]
 
-    \theoremstyle{defstyle} % definition style
+    \theoremstyle{defstyle}% definition style
     \newtheorem{definition}{\definitionname}[\@@_level_str]
 
-    \theoremstyle{prostyle} % proposition style
+    \theoremstyle{prostyle}% proposition style
     \newtheorem{proposition}{\propositionname}[\@@_level_str]
   }
 }
