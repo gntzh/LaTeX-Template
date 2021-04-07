@@ -1,0 +1,72 @@
+\PassOptionsToPackage{
+  fontset=none,
+  heading=true
+}{ctex}
+{%- if cookiecutter.minted == "True" %}
+\PassOptionsToPackage{outputdir=out}{minted}
+{% endif %}
+{%- if cookiecutter.biblatex == "True" %}
+\PassOptionsToPackage{style=gb7714-2015}{biblatex}
+{% endif %}
+{%- raw -%}
+\usepackage{./styles}
+\usepackage{ctex}
+\unimathsetup{math-style=ISO}
+\graphicspath{{img/}}
+%%%%%%%%%% Font %%%%%%%%%%
+\setmainfont{IBM Plex Serif}
+\setsansfont{IBM Plex Sans}
+\setmonofont{IBM Plex Mono}
+\setCJKmainfont{Source Han Serif SC}[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = 方正楷体简体,
+    BoldItalicFont = 方正楷体简体,
+]
+\setCJKsansfont{Source Han Sans SC}[
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = 方正楷体简体,
+    BoldItalicFont = 方正楷体简体,
+]
+%%%%%%%%%% Color theme %%%%%%%%%%
+\definecolor{structure}{RGB}{31,186,190}
+\definecolor{main}{RGB}{59,180,5}
+\definecolor{second}{RGB}{175,153,8}
+\definecolor{third}{RGB}{244,105,102}
+\definecolor{success}{HTML}{42b983}
+\definecolor{info}{HTML}{3399ff}
+\definecolor{warning}{HTML}{e7c000}
+\definecolor{danger}{HTML}{cc0000}
+% 公式间距
+\AtBeginDocument{% 设置在这里或者\normalsize有效
+  \setlength{\abovedisplayskip}{5pt}
+  \setlength{\belowdisplayskip}{5pt}
+  \setlength{\abovedisplayshortskip}{3pt}
+  \setlength{\belowdisplayshortskip}{3pt}
+}
+{% endraw %}
+
+\AtEndPreamble{
+  \usepackage{subfiles}
+
+  {% if cookiecutter.minted == "True" -%}
+  {% raw -%}
+  \usepackage{xpatch}
+  \xpatchcmd{\inputminted}{#3}{\import@path#3}{}{}
+  {%- endraw %}
+  {%- endif %}
+
+  {% if cookiecutter.biblatex == "True" -%}
+  \addbibresource{\subfix{references.bib}}
+  {%- endif %}
+
+  {% raw -%}
+  \usepackage{bookmark}
+  \hypersetup{
+    colorlinks,
+    bookmarksnumbered=true,
+    pdfstartview=FitH,
+  }
+  {%- endraw %}
+}

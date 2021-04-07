@@ -1,0 +1,53 @@
+\RequirePackage{expl3, xparse, l3keys2e}
+%<@@=vPkg>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplFile{}{}{}{}
+
+\PassOptionsToPackage{no-math}{fontspec}
+\RequirePackage{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{amsmath}
+\RequirePackage{unicode-math}
+\RequirePackage[many]{tcolorbox}
+
+%% biblatex begin
+{% if cookiecutter.biblatex == "True" -%}
+{% raw -%}
+\RequirePackage{biblatex}
+{%- endraw %}
+{%- endif %}
+%% biblatex end
+
+%% minted begin
+{% if cookiecutter.minted == "True" -%}
+{% raw -%}
+\RequirePackage{minted}
+\tcbuselibrary{minted}
+{%- endraw %}
+{%- endif %}
+%% minted end
+
+%% box begin
+{% raw -%}
+\NewTColorBox{block}{O{success} O{\MakeUppercase{#1}} O{}}{
+  enhanced~jigsaw,
+  breakable,
+  sharp~corners,
+  boxrule=0em,
+  right=1em,
+  left=1em,
+  toptitle=0.8em,
+  title=#2,
+  fonttitle={\bfseries},
+  coltitle=#1,
+  colback=#1!5,
+  colbacktitle=#1!5,
+  borderline~west={0.5em}{0em}{#1},
+  #3
+}
+{%- endraw %}
+%% box end
+
+%<@@=>

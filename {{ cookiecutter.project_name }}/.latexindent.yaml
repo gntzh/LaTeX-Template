@@ -1,0 +1,28 @@
+defaultIndent: "    "
+
+indentAfterItems:
+
+indentRules:
+  tikzpicture: "  "
+  node: "  "
+  child: "  "
+
+itemNames:
+  draw: true
+  node: true
+  path: true
+  child: true
+
+verbatimEnvironments:
+  code: true
+  lstlisting: true
+  minted: true
+  markdown: true
+  verbatim: true
+  # TODO 无法工作
+  graph: true
+  tikzpicture: true
+  forest: true
+
+verbatimCommands:
+  graph: true

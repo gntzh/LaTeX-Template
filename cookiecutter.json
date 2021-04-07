@@ -1,0 +1,25 @@
+{
+    "project_name": "demo",
+    "title": "{{cookiecutter.project_name}}",
+    "author": "",
+    "biblatex": [
+        false,
+        true
+    ],
+    "minted": [
+        false,
+        true
+    ],
+    "config_position": [
+        "none",
+        "home",
+        "project"
+    ],
+    "_copy_without_render": [
+        "_gitignore",
+        ".chktexrc",
+        ".latexmkrc",
+        "references.bib",
+        "*.vscode"
+    ]
+}

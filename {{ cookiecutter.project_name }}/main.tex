@@ -1,0 +1,21 @@
+\documentclass[
+    oneside,
+]{book}
+\input{./preamble.tex}
+\title{{"{%s}" % cookiecutter.title}}
+\author{{"{%s}" % cookiecutter.author}}
+\date{\today}
+
+\AtBeginDocument{
+    % \maketitle
+    % \tableofcontents
+}
+\AtEndDocument{
+    {%- if cookiecutter.biblatex == "True" %}
+    \printbibliography
+    {%- endif %}
+}
+
+\begin{document}
+
+\end{document}
