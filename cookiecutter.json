@@ -7,7 +7,10 @@
         "home",
         "project"
     ],
-    "nerd_font": "n",
+    "fonts": [
+        "none",
+        "default"
+    ],
     "biblatex": [
         false,
         true
@@ -16,6 +19,7 @@
         false,
         true
     ],
+    "nerd_font": "n",
     "_copy_without_render": [
         "_gitignore",
         ".chktexrc",

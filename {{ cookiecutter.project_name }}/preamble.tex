@@ -1,7 +1,7 @@
-\PassOptionsToPackage{
+\usepackage[
   fontset=none,
   heading=true,
-}{ctex}
+]{ctex}
 {%- if cookiecutter.minted == "True" %}
 \PassOptionsToPackage{outputdir=out}{minted}
 {%- endif %}
@@ -13,14 +13,18 @@
 \usepackage{ctex}
 \unimathsetup{math-style=ISO}
 \graphicspath{{img/}}
+{%- endraw %}
 
 %%%%%%%%%% 页面布局 %%%%%%%%%%
 \geometry{a4paper,hmargin=3.18cm,vmargin=2.54cm}
 
 %%%%%%%%%% Font %%%%%%%%%%
+{% if cookiecutter.fonts == "default" -%}
+{% raw -%}
 \setmainfont{IBM Plex Serif}
 \setsansfont{IBM Plex Sans}
 \setmonofont{IBM Plex Mono}
+\setmathfont{Cambria Math}
 \setCJKmainfont{Source Han Serif SC}[
   UprightFont = *-Regular,
   BoldFont = *-Bold,
@@ -33,7 +37,10 @@
   ItalicFont = 方正楷体简体,
   BoldItalicFont = 方正楷体简体,
 ]
+{%- endraw %}
+{%- endif %}
 
+{% raw -%}
 %%%%%%%%%% Color theme %%%%%%%%%%
 \definecolor{structure}{RGB}{31,186,190}
 \definecolor{main}{RGB}{59,180,5}
