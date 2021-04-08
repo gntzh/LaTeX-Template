@@ -10,6 +10,7 @@
 \RequirePackage{array}
 \RequirePackage{amsmath}
 \RequirePackage{unicode-math}
+\RequirePackage{geometry}
 \RequirePackage[many]{tcolorbox}
 
 %% biblatex begin
@@ -19,6 +20,21 @@
 {%- endraw %}
 {%- endif %}
 %% biblatex end
+
+%% nerd font begin
+{% if cookiecutter.nerd_font != "n" -%}
+\newfontface\nerdfont{
+  {%- if cookiecutter.nerd_font|lower == "y" -%}
+  CaskaydiaCove~Nerd~Font
+  {%- else -%}
+  {{ cookiecutter.nerd_font|replace(" ", "~")}}
+  {%- endif -%}
+}
+{% raw -%}
+\NewDocumentCommand{\nf}{m o}{{\IfNoValueF{#2}{\color{#2}}\nerdfont #1}}
+{%- endraw %}
+{%- endif %}
+%% nerd font end
 
 %% minted begin
 {% if cookiecutter.minted == "True" -%}

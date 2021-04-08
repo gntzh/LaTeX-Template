@@ -2,6 +2,12 @@
     "project_name": "demo",
     "title": "{{cookiecutter.project_name}}",
     "author": "",
+    "config_position": [
+        "none",
+        "home",
+        "project"
+    ],
+    "nerd_font": "n",
     "biblatex": [
         false,
         true
@@ -9,11 +15,6 @@
     "minted": [
         false,
         true
-    ],
-    "config_position": [
-        "none",
-        "home",
-        "project"
     ],
     "_copy_without_render": [
         "_gitignore",
