@@ -12,10 +12,15 @@
 }
 \AtEndDocument{
     {%- if cookiecutter.biblatex == "True" %}
-    \printbibliography
+    % \printbibliography
+    {%- endif %}
+    {%- if cookiecutter.makeindex == "True" %}
+    % \printindex
     {%- endif %}
 }
-
+{%- if cookiecutter.makeindex == "True" %}
+% \makeindex
+{%- endif %}
 \begin{document}
 
 \end{document}

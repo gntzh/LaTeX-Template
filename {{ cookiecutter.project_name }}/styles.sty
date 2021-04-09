@@ -12,14 +12,13 @@
 \RequirePackage{unicode-math}
 \RequirePackage{geometry}
 \RequirePackage[many]{tcolorbox}
-%% biblatex begin
+% Other Packages
 {% if cookiecutter.biblatex == "True" -%}
-{% raw -%}
 \RequirePackage{biblatex}
-{%- endraw %}
 {%- endif %}
-%% biblatex end
-
+{% if cookiecutter.makeindex == "True" -%}
+\RequirePackage{makeidx}
+{%- endif %}
 %% nerd font begin
 {% if cookiecutter.nerd_font != "n" -%}
 \newfontface\nerdfont{
@@ -34,7 +33,6 @@
 {%- endraw %}
 {%- endif %}
 %% nerd font end
-
 %% minted begin
 {% if cookiecutter.minted == "True" -%}
 {% raw -%}
@@ -43,7 +41,6 @@
 {%- endraw %}
 {%- endif %}
 %% minted end
-
 %% box begin
 {% raw -%}
 \NewTColorBox{block}{O{success} O{\MakeUppercase{#1}} O{}}{
