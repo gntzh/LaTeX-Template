@@ -2,6 +2,17 @@
   fontset=none,
   heading=true,
 ]{ctex}
+\usepackage{xcolor}
+%%%%%%%%%% Color theme %%%%%%%%%%
+\definecolor{structure}{RGB}{31,186,190}
+\definecolor{main}{RGB}{59,180,5}
+\definecolor{second}{RGB}{175,153,8}
+\definecolor{third}{RGB}{244,105,102}
+\definecolor{success}{HTML}{42b983}
+\definecolor{info}{HTML}{3399ff}
+\definecolor{warning}{HTML}{e7c000}
+\definecolor{danger}{HTML}{cc0000}
+\definecolor{spot}{rgb}{0,0.2,0.6}
 {%- if cookiecutter.minted == "True" %}
 \PassOptionsToPackage{outputdir=out}{minted}
 {%- endif %}
@@ -42,16 +53,6 @@
 {%- endif %}
 
 {% raw -%}
-%%%%%%%%%% Color theme %%%%%%%%%%
-\definecolor{structure}{RGB}{31,186,190}
-\definecolor{main}{RGB}{59,180,5}
-\definecolor{second}{RGB}{175,153,8}
-\definecolor{third}{RGB}{244,105,102}
-\definecolor{success}{HTML}{42b983}
-\definecolor{info}{HTML}{3399ff}
-\definecolor{warning}{HTML}{e7c000}
-\definecolor{danger}{HTML}{cc0000}
-\definecolor{spot}{rgb}{0,0.2,0.6}
 % 公式间距
 \AtBeginDocument{% 设置在这里或者\normalsize有效
   \setlength{\abovedisplayskip}{5pt}

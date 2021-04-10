@@ -44,7 +44,7 @@
 %% minted end
 %% box begin
 {% raw -%}
-\NewTColorBox{block}{O{success} O{\MakeUppercase{#1}} O{}}{
+\NewTColorBox{block}{O{success} O{} O{}}{
   enhanced~jigsaw,
   breakable,
   sharp~corners,
@@ -55,12 +55,72 @@
   title=#2,
   fonttitle={\bfseries},
   coltitle=#1,
-  colback=#1!5,
-  colbacktitle=#1!5,
+  colback=#1!10,
+  colbacktitle=#1!10,
   borderline~west={0.5em}{0em}{#1},
   #3
 }
 {%- endraw %}
 %% box end
-
+{% if cookiecutter.thmEnv == "True" -%}
+{% raw -%}
+%% theorems begin
+\def\definitionname{定义}
+\def\theoremname{定理}
+\tcbset{
+  commonThm/.style = {
+    enhanced,
+    breakable,
+    coltitle = white,
+    colback = white,
+    fontupper = \itshape,
+    fonttitle = \sffamily\bfseries,
+    lower~separated = false,
+    boxrule = 0.5pt,
+    top=8pt,
+    before~skip=8pt,
+    attach~boxed~title~to~top~left={
+      yshift=-0.11in,
+      xshift=0.15in,
+    },
+    boxed~title~style={
+      colframe=white,
+      boxrule=0pt,
+      arc=0pt,
+      outer~arc=0pt,
+    },
+    separator~sign={.},
+  },
+  defstyle/.style={
+    commonThm,
+    colframe=main,
+    colback=main!5,
+    colbacktitle=main,
+  },
+  thmstyle/.style={
+    commonThm,
+    colframe=second,
+    colback=second!5,
+    colbacktitle=second,
+  },
+  propstyle/.style={
+    commonThm,
+    colframe=third,
+    colback=third!5,
+    colbacktitle=third,
+  },
+}
+\DeclareTColorBox[auto~counter,number~within=section,number~freestyle={\noexpand\thesection-\noexpand\arabic{\tcbcounter}}]{theorem}{ o t\label g }{
+  thmstyle,
+  IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname \thetcbcounter},
+  IfBooleanT={#2}{label={#3}}
+}
+\DeclareTColorBox[auto~counter,number~within=section,number~freestyle={\noexpand\thesection-\noexpand\arabic{\tcbcounter}}]{definition}{ o t\label g }{
+  defstyle,
+  IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
+  IfBooleanT={#2}{label={#3}}
+}
+%% theorems end
+{%- endraw %}
+{%- endif %}
 %<@@=>

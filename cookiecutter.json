@@ -23,6 +23,10 @@
         false,
         true
     ],
+    "thmEnv": [
+        false,
+        true
+    ],
     "nerd_font": "n",
     "_copy_without_render": [
         "_gitignore",
