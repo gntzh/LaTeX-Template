@@ -2,13 +2,14 @@
 \usepackage{xcolor}% 用于各种颜色环境
 \usepackage{graphicx}% 加强插图, 含graphics
 \graphicspath{{img/}}% 设置图片检索路径
-\usepackage{array}% 对表格列格式的扩展。
-\usepackage{amsmath}% 提供数学公式支持
+\usepackage{array}% 对表格列格式的扩展
+\usepackage{mathtools}% 替代amsmath
 \usepackage{fontspec}% 西文字体设置
 % 注意，no-math无法直接在Package option list中写
 \PassOptionsToPackage{no-math}{fontspec}
 % 提供完整的符号命令, 不需要upgreek和bm等数学字体宏包
 \usepackage[math-style=ISO]{unicode-math}
+% 注意，需在amsmath之后调用
 \usepackage{bookmark}% 书签增强，一次编译，随意添加
 
 %---------- 广泛 ----------%
@@ -46,6 +47,9 @@
 
 %---------- 其他样式 ----------%
 \usepackage{transparent}% 提供透明颜色
+\usepackage{enumitem}% 控制列表环境，替代enumerate
+% 注意，与beamer冲突
+
 
 %---------- 引用 ----------%
 \usepackage[style=gb7714-2015]{biblatex}
@@ -56,7 +60,8 @@
 \providecommand{\refname}{参考文献}
 
 %---------- 公式 ----------%
-\usepackage{mathtools}% 简化、增强数学公式
+\usepackage{amsmath}% AMS数学符号
+\usepackage{mathtools}% 完全替代amsmath，传递参数，修复bug，扩展符号
 \usepackage{witharrows}% 箭头标注
 
 %---------- TiKz Lib----------%
@@ -85,6 +90,8 @@
 \usepackage{ocgx2}% Optional Content Groups, 实现交互式折叠内容
 
 %---------- 其他 ----------%
+\usepackage{subfiles}% 分割文档，可独立编译子文档
+% 注意，不要放在\AtEndPreamble，可能导致编译子文档时钩子出错
 \usepackage{makeidx}% 索引，归纳关键词
 
 %---------- 辅助工具 ----------%

@@ -1,11 +1,10 @@
 \def\lang{zh}
 \usepackage[
-  scheme=chinese,
+  fontset=none,
   heading=true,
-  zihao=-4
 ]{ctex}
 \usepackage{./style/packages}
-\setlist{nosep}% 清楚列表间距
+\setlist{nosep}% 清除列表间距
 %%%%%%%%%% 页面布局 %%%%%%%%%%
 \geometry{a4paper,hmargin=3.18cm,vmargin=2.54cm}
 %%%%%%%%%% Font %%%%%%%%%%
@@ -57,7 +56,7 @@
 \usepackage[minted]{./style/subfile}
 \AtEndPreamble{
   \hypersetup{
-    colorlinks,
+    colorlinks=true,
     bookmarksnumbered=true,
     pdfstartview=FitH,
   }
