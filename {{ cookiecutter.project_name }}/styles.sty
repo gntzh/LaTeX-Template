@@ -1,5 +1,5 @@
 \RequirePackage{expl3, xparse, l3keys2e}
-%<@@=vPkg>
+%<@@=vStyles>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesExplFile{}{}{}{}
 
@@ -49,15 +49,18 @@
   breakable,
   sharp~corners,
   boxrule=0em,
+  leftrule=0.5em,
+  boxsep=0em,
   right=1em,
   left=1em,
   toptitle=0.8em,
   title=#2,
   fonttitle={\bfseries},
-  coltitle=#1,
+  colframe=#1,
   colback=#1!10,
   colbacktitle=#1!10,
-  borderline~west={0.5em}{0em}{#1},
+  coltext=#1!30!black,
+  coltitle=#1!30!black,
   #3
 }
 {%- endraw %}

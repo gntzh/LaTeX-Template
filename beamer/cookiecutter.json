@@ -1,0 +1,8 @@
+{
+    "project_name": "beamer-demo",
+    "title": "{{cookiecutter.project_name}}",
+    "author": "",
+    "_copy_without_render": [
+        "_gitignore"
+    ]
+}

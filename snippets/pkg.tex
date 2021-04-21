@@ -1,4 +1,10 @@
 %---------- 几乎必须 ----------%
+\usepackage[
+  fontset=fandol,
+  heading=true,
+]{ctex}% 中文支持
+% 若要直接在数学环境中输出中文，须向xeCJK传递CJKmath参数
+\PassOptionsToPackage{CJKmath}{xeCJK}
 \usepackage{xcolor}% 用于各种颜色环境
 \usepackage{graphicx}% 加强插图, 含graphics
 \graphicspath{{img/}}% 设置图片检索路径
@@ -68,7 +74,8 @@
 \usepackage{tikz}
 \usetikzlibrary{external}% 保存所画图形
 \tikzexternalize[prefix=out/tikz/,optimize command away=\includepdf]
-\tcbset{shield externalize} % 屏蔽layer层的externalize, 避免与tcolorbox的冲突
+% 注意与tcolorbox一起使用时，要屏蔽其layer层的externalize, 避免与tcolorbox的冲突
+\tcbset{shield externalize}
 
 %---------- PGF/TiKz ----------%
 \usepackage[siunitx, RPvoltages]{circuitikz}% 电路图

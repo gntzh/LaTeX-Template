@@ -1,0 +1,226 @@
+\RequirePackage{expl3,xparse,l3keys2e}
+%<@@=vbStyles>
+\ProvidesExplFile{}{}{}{}
+\mode<presentation>
+\keys_define:nn {@@}{
+  progressbar.choice:,
+  progressbar.default:n = frametitle,
+  progressbar/none.code:n = {},
+  progressbar/headline.code:n = \addtobeamertemplate{headline}{}{
+    \usebeamertemplate*{progress~bar~in~head/foot}
+  },
+  progressbar/frametitle.code:n = \addtobeamertemplate{frametitle}{}{
+    \usebeamertemplate*{progress~bar~in~head/foot}
+  },
+}
+\RequirePackage[many]{tcolorbox}
+
+\providecommand{\tikzexternalenable}{}
+\providecommand{\tikzexternaldisable}{}
+
+%%%%%%%%%% Color %%%%%%%%%%
+\definecolor{background}{HTML}{fafafa}
+\definecolor{structure}{HTML}{34495e}
+\colorlet{structureText}{white}
+\colorlet{structureTextSec}{structure!10}
+\setbeamercolor*{structure}{fg=structure}
+\definecolor{primary}{HTML}{2d3e50}
+\definecolor{secondary}{HTML}{d15306}
+\definecolor{tertiary}{HTML}{35837b}
+\colorlet{textPrimary}{black!90}
+\colorlet{textSecondary}{black!30}
+\colorlet{textDisabled}{gray!30}
+
+\setbeamercolor*{structure}{fg=structure}
+
+\setbeamercolor*{background~canvas}{bg=background}
+\setbeamercolor*{background~canvas}{bg=background}
+\setbeamercolor*{frametitle}{fg=structureText}
+\setbeamercolor*{normal~text}{fg=textPrimary}
+\setbeamercolor*{item}{fg=primary}
+\setbeamercolor*{itemize~item}{fg=secondary}
+\setbeamercolor*{itemize~subitem}{fg=primary}
+\setbeamercolor*{itemize~subsubitem}{fg=primary}
+\setbeamercolor*{enumerate~item}{fg=secondary}
+\setbeamercolor*{item~projected}{parent=enumerate~item,use=enumerate~item,fg=white,bg=enumerate~item.fg}
+\setbeamercolor*{description~item}{fg=primary}
+\setbeamercolor*{caption~name}{fg=primary}
+
+%%%%%%%%%% Font %%%%%%%%%%
+\setbeamerfont*{title}{size=\Huge,series=\bfseries}
+\setbeamerfont*{subtitle}{size=\Large,series=\bfseries}
+\setbeamerfont*{author}{size=\large,series=\normalfont}
+\setbeamerfont*{institute}{size=\large,series=\normalfont}
+\setbeamerfont*{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont*{framesubtitle}{size=\normalsize}
+
+%%%%%%%%%% Outer %%%%%%%%%%
+\def\maketitle{
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \frame[plain,noframenumbering]{\titlepage}
+  \fi
+}
+\setbeamertemplate{title~page}{
+  \tikzexternaldisable
+  \begin{tikzpicture}[
+    remember~picture,overlay,
+    sider/.style={
+      draw=none,
+      rectangle,
+      outer~xsep=-0.1mm,
+      minimum~height=\paperheight,minimum~width=0.8cm,
+      fill=structure
+    },
+  ]
+    \node[anchor=west,sider] at (current~page.west){};
+    \node[anchor=south~west,sider,fill=structure!90!black,minimum~height=0.3\paperheight] at (current~page.south~west){};
+    \node[align=center] at (current~page.center){
+      {\usebeamerfont{title}\color{textPrimary}\inserttitle}
+      \tl_if_empty:NF\insertsubtitle{
+        \\[3mm]{\usebeamerfont{subtitle}\color{textSecondary}\insertsubtitle}
+      }
+      \\[1mm]{\color{textDisabled}\rule{.7\paperwidth}{.2mm}}
+      \tl_if_empty:NF\insertauthor{
+        \\[3.5mm]{\usebeamerfont{subtitle}\color{textSecondary}\insertauthor}
+      }
+      \tl_if_empty:NF\insertinstitute{
+        \\[3.5mm]{\usebeamerfont{institute}\color{textSecondary}\insertinstitute}
+      }
+    };
+  \end{tikzpicture}
+  \tikzexternalenable
+}
+\setbeamertemplate{headline}{}
+% TODO \LogoOn\LogoOff
+\def\insertLogo{}
+\newcommand\Logo[1]{\def\insertLogo{#1}}
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\textwidth]{structure}
+    \tcbsidebyside[
+      sharp~corners,
+      spread~sidewards,nobeforeafter,boxsep=0mm,boxrule=0mm,
+      left=2mm,right=.5mm,top=1mm,bottom=.7mm,
+      height=7mm,valign=center,
+      colback=structure,coltext=structureText,
+      sidebyside~adapt=right,
+      lower~separated=false,sidebyside~gap=0mm,
+    ]{
+      \insertframetitle\hspace*{1mm}{\usebeamerfont{framesubtitle}\color{structureTextSec}\insertframesubtitle}
+    }{\insertLogo}
+  \end{beamercolorbox}
+  % \usebeamertemplate*{progress~bar~in~head/foot}
+}
+\setbeamertemplate{navigation~symbols}{}
+\setbeamertemplate{footline}{
+  \nointerlineskip
+  \hfill\vspace*{1mm}{\color{textSecondary}\insertframenumber}\hspace*{1.5mm}
+}
+\setbeamertemplate{progress~bar~in~head/foot}{
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth]{structure}
+    \tikzexternaldisable
+    \begin{tikzpicture}
+      \path[fill=primary!30] (0,0) rectangle (\paperwidth, 1mm);
+      \path[fill=primary] (0,0) rectangle (\fp_eval:n{\insertframenumber/\inserttotalframenumber}\paperwidth, 1mm);
+    \end{tikzpicture}
+    \tikzexternalenable
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%% Inner %%%%%%%%%%
+\tikzset{
+  section~number/.style={
+    circle,
+    fill=secondary,
+    minimum~size=0.4em,
+    text=secondary!10,
+    inner~sep=1.5pt,
+  },
+  section/.style={
+    draw=none,
+    rectangle,
+    minimum~height=1em,
+    minimum~width=0.8\textwidth,
+    text~width=0.8\textwidth,
+    text=textPrimary,
+    align=left
+  },
+  subsection~number/.style={
+    circle,  
+    fill=structure!50,
+    inner~sep=0pt,
+    minimum~size=0.15cm,
+  },
+  subsection/.style={
+    draw=none,
+    rectangle,
+    minimum~height=1em,
+    minimum~width=0.8\textwidth,
+    text~width=0.8\textwidth,
+    text=textPrimary!80,
+    align=left
+  }
+}
+\setbeamertemplate{section~in~toc}{
+  \tikzexternaldisable
+  \hspace*{0.4cm}\tikz[baseline=-.5ex]\node[section~number]{{\bfseries\small\inserttocsectionnumber}};
+  \hspace*{1mm}\tikz[baseline=-.5ex]\node[section]{\usebeamerfont*{toc~title} \inserttocsection};\\[-3mm]
+  \hspace*{11.3mm}{\color{textSecondary}\rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+  \tikzexternalenable
+}
+\setbeamertemplate{subsection~in~toc}{
+  \tikzexternaldisable
+  \hspace*{5.5mm}\tikz[baseline=-.5ex]\node[subsection~number]{};
+  \hspace*{5mm} \tikz[baseline=-.5ex]\node[subsection]{\usebeamerfont*{toc subtitle}\inserttocsubsection};\\[-0.2cm]
+  \tikzexternalenable
+}
+\setbeamertemplate{section~in~toc~shaded}{
+  \tikzexternaldisable
+  \hspace*{4mm}\tikz[baseline=-.5ex]\node[section~number, fill=textDisabled, text=background]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
+  \ \tikz[baseline=-.5ex]\node[section, text=structureTextSec]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.3cm]
+  \hspace*{13mm}{\color{textSecondary}\rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+  \tikzexternalenable
+}
+\setbeamertemplate{subsection~in~toc~shaded}{
+  \tikzexternaldisable
+  \hspace*{5.4mm}\tikz[baseline=-.5ex]\node[subsection~number,fill=textDisabled]{};
+  \hspace*{5mm}\tikz[baseline=-.5ex]\node[subsection,text=textDisabled]{};\\[-0.2cm]
+  \tikzexternalenable
+}
+\setbeamertemplate{progress~bar~in~section~page}{
+  \tikzexternaldisable
+  \begin{tikzpicture}
+    \path[fill=primary!30] (0,0) rectangle (\textwidth, .3mm);
+    \path[fill=primary] (0,0) rectangle (\fp_eval:n{\insertframenumber/\inserttotalframenumber}\textwidth, .3mm);
+  \end{tikzpicture}
+  \tikzexternalenable
+}
+\setbeamertemplate{section~page}{
+  \centering
+  \begin{minipage}{22em}
+    \raggedright
+    \usebeamercolor[fg]{section~title}
+    \usebeamerfont{section~title}
+    \insertsectionhead\\[-1ex]
+    \usebeamertemplate*{progress~bar~in~section~page}
+    \par
+    \tl_if_empty:NF\insertsubsectionhead{
+      \usebeamercolor[fg]{subsection~title}
+      \usebeamerfont{subsection~title}
+      \insertsubsectionhead
+    }
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+% Itemize Enumerate
+\setbeamertemplate{itemize~items}{\large$\bullet$}
+\setbeamertemplate{enumerate~items}[circle]
+
+\ProcessKeysOptions{@@}
+\mode
+<all>
+%<@@=>
